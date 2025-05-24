@@ -1,0 +1,28 @@
+<tr hx-on:htmx:before-cleanup-element="console.log(event)">
+  <td>{{ todo.name}}</td>
+  <td>
+    {% if todo.is_done %}DONE{% else %}NOT YET DONE{% endif %}
+  </td>
+  <td>
+    {% if not todo.is_done %}
+      <button
+        type="button"
+        class="btn btn-primary"
+        hx-put="/todo/{{ todo.id }}/done"
+        hx-target="closest tr"
+        hx-swap="outerHTML">
+          Mark Done
+      </button>
+    {% endif %}
+
+    <button
+      type="button"
+      class="btn btn-danger"
+      hx-delete="/todo/{{ todo.id }}"
+      hx-target="closest tr"
+      hx-swap="delete"
+      hx-confirm="Are you sure want to delete this task?">
+      Delete
+    </button>
+  </td>
+</tr>
