@@ -12,6 +12,7 @@ templates = Jinja2Templates(directory="templates")
 
 app = FastAPI(name="todo")
 
+
 @app.get('/')
 async def home(request: Request, hide_done_tasks: bool = False):
     with Session() as session:
@@ -71,6 +72,7 @@ async def mark_todo_as_done(request: Request, task_id: int):
                 "todo": todo
             }
         )
+
 
 @app.delete('/todo/{task_id}')
 async def delete_todo(request: Request, task_id: int):
